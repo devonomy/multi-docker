@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "devonomy/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "devonomy/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "devonomy/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "devonomy/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPor": 80    
+                }
+            ],
+            "links": [
+                "client",
+                "server"
+            ]
+        }
+    ]
+}
